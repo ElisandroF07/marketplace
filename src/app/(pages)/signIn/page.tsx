@@ -14,7 +14,7 @@ type userDataType = {
 	[key: string]: string;
 };
 
-const CLIENT_ID = '';
+const CLIENT_ID = '838474632269-k97u1p4di3gsamjkekrn66n18k259s89.apps.googleusercontent.com';
 
 export default function SignIn() {
 	useEffect(() => {
