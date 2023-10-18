@@ -54,7 +54,7 @@ export default function SignUpForm() {
 				<input
 					className="input w-full h-[50px] rounded-[11px] outline-none pl-[24px] pr-[24px]"
 					type="email"
-					placeholder="Enter your email"
+					placeholder="Introduza o seu email"
 					{...register('email')}
 				/>
 				{errors.email && (
@@ -72,7 +72,7 @@ export default function SignUpForm() {
 				<input
 					className="input w-full h-[50px] rounded-[11px] outline-none pl-[24px] pr-[24px]"
 					type="password"
-					placeholder="Enter your password"
+					placeholder="Introduza a sua senha"
 					{...register('password')}
 				/>
 				{errors.password && (
