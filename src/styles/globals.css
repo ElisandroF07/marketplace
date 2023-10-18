@@ -13,7 +13,7 @@
   ---progress-color: #dddddd;
   --focus-color: #196297;
   --input-borderColor: #CBCBCB;
-  --body-backgroundImage: url('../assets/images/bgLight.png');
+  --body-backgroundImage: url('');
   --main-borderColor: #c4c4c4;
   --aside-backgroundColor: #ffffff;
 }
@@ -30,7 +30,7 @@
     ---progress-color: #2e2e2e;
     --focus-color: #196297;
     --input-borderColor: #2b2b2b;
-    --body-backgroundImage: url('../assets/images/bgDark.png');
+    --body-backgroundImage: url('');
     --main-borderColor: #373737;
     --aside-backgroundColor: #00000040;
   }
