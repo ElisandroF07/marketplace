@@ -57,7 +57,7 @@ export default function SignIn() {
 					subtitle="Compre e venda no conforto do seu lar!"
 				/>
 				<SignInForm />
-				<script
+				<script	
 					src="https://apis.google.com/js/api:client.js"
 					async
 					defer></script>

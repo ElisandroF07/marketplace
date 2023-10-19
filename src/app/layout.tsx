@@ -23,7 +23,7 @@ export default function RootLayout({
 					<div className="aside">
 						<div className="asideTop">
 							<h1
-								className="font-[500] text-[28px] w-[70%] mt-[40px] text-[var(--text-primaryColor)]"
+								className="font-[500] text-[28px] w-[70%] mt-[30px] text-[var(--text-primaryColor)]"
 								style={{ lineHeight: '20px' }}>
 								{' '}
 								Marketplace
