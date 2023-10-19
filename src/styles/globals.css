@@ -10,7 +10,7 @@
   --dutone-background: #E8EEF2;
   --duotone-foreground: #196297;
   --focus-color: #ffffff;
-  ---progress-color: #dddddd;
+  --progress-color: #dddddd;
   --focus-color: #196297;
   --input-borderColor: #CBCBCB;
   --body-backgroundImage: url('../assets/images/bgLight.PNG');
@@ -27,7 +27,7 @@
     --dutone-background: #0061ff36;
     --duotone-foreground: ##0866FE;
     --focus-color: #000000;
-    ---progress-color: #2e2e2e;
+    --progress-color: #2e2e2e;
     --focus-color: #196297;
     --input-borderColor: #2b2b2b;
     --body-backgroundImage: url('../assets/images/bgDark.PNG');
@@ -40,7 +40,7 @@
 
   body > .main {
     max-width: max-content;
-   padding: 0px 30px 0px 0px;
+   padding: 0px 20px 0px 0px;
    overflow: hidden;
   }
 
@@ -49,7 +49,7 @@
   }
 
   .asideImage {
-    width: 90%;
+    width: 80%;
   }
 
   .asideTop {
@@ -63,7 +63,7 @@
     width: 450px;
     height: 100%;
     background-color: var(--aside-backgroundColor);
-    margin-right: 40px;
+    margin-right: 25px;
     align-items: center;
     justify-content: start;
     flex-direction: column;
@@ -75,7 +75,7 @@
     max-height: 700px;
     border-top-left-radius: 40px;
     border-bottom-right-radius: 40px;
-    padding: 0px 30px;
+    padding: 0px 20px;
     border: 1px solid var(--main-borderColor);
   }
 }
@@ -111,32 +111,47 @@ body {
   justify-content: center;
 }
 
-.preloader {
-  position: relative;
-  width: 180px;
-  height: 5px;
-  border-radius: 10px;
-  background-color: var(--text-primaryColor);
-  -webkit-box-reflect: below .2px var(--text-primaryColor);
+.loader {
+	display: block;
+	position: relative;
+	width: 50%;
+	display: grid;
+	place-items: center;
+  border-radius: 3px;
 }
 
-.preloader:before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--text-primaryColor), var(---progress-color),  var(---progress-color), var(---progress-color), var(--text-primaryColor));
-  animation: animate 5s linear infinite;
-  background-size: 500%;
-  border-radius: 10px;
+.loader::before,
+.loader::after {
+	content: '';
+	box-sizing: border-box;
+	position: absolute;
+  border-radius: 2px;
 }
 
-@keyframes animate {
-  0% {
-    background-position: 0 0;
-  }
-  0% {
-    background-position: 500% 0;
-  }
+
+.loader.--4::before {
+	height: 3px;
+	width: 170px;
+	background-color:var(--text-primaryColor);
+	animation: loader-4 0.8s cubic-bezier(0, 0, 0.03, 0.9) infinite;
+}
+
+@keyframes loader-4 {
+	0%, 44%, 88.1%, 100% {
+		transform-origin: left;
+	}
+	
+	0%, 100%, 88% {
+		transform: scaleX(0);
+	}
+	
+	44.1%, 88% {
+		transform-origin: right;
+	}
+	
+	33%, 44% {
+		transform: scaleX(1);
+	}
 }
 
 .inputControl input,
@@ -151,4 +166,3 @@ body {
   font-weight: 400;
   color: var(--text-secondaryColor);
 }
-

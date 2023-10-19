@@ -19,18 +19,18 @@ export default function RootLayout({
 	return (
 		<html lang="pt-PT">
 			<body className={inter.className}>
-				<main className="main">
+				<main className="main h-full">
 					<div className="aside">
 						<div className="asideTop">
 							<h1
-								className="font-[500] text-[28px] w-[70%] mt-[30px] text-[var(--text-primaryColor)]"
+								className="font-[500] text-[28px] w-[70%] mt-[40px] text-[var(--text-primaryColor)]"
 								style={{ lineHeight: '20px' }}>
 								{' '}
 								Marketplace
 							</h1>
 							<p className="font-[200] text-[14px] mt-[10px] text-[var(--text-secondaryColor)]">
 								A sua plataforma online para compra e venda de artigos, entre
-								para poder usurfruir de todos os serviços que oferecemos à você.
+								para poder usufruir todos os serviços que oferecemos à você.
 							</p>
 						</div>
 						<Image
@@ -39,7 +39,7 @@ export default function RootLayout({
 							alt="shopping"
 						/>
 					</div>
-					<div className="content">{children}</div>
+					<div className="content h-full">{children}</div>
 				</main>
 			</body>
 		</html>

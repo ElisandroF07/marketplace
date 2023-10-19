@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import RedirectLink from '../shared/RedirectLink';
 
 const createUserSchema = z.object({
 	name: z
@@ -49,6 +50,8 @@ export default function SignUpForm() {
 
 	function saveData(data: any) {
 		console.log(data);
+		let redirectLink = document.querySelector('#redirectLink') as HTMLLinkElement
+		redirectLink?.click()
 	}
 
 	return (
@@ -172,12 +175,13 @@ export default function SignUpForm() {
 				<p className="w-full text-center mt-[20px] text-[13px] mb-[20px] text-[var(--text-primaryColor)] font-[300]">
 					Já tem uma conta?{' '}
 					<Link
-						href="/signIn"
+						href="/signin"
 						className="text-[var(--focus-color)]">
 						Entrar
 					</Link>
 				</p>
 			</div>
+			<RedirectLink id='redirectLink' href='/emailvalidation'/>
 		</form>
 	);
 }

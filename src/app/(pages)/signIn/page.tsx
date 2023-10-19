@@ -16,7 +16,7 @@ type userDataType = {
 
 const CLIENT_ID = '838474632269-k97u1p4di3gsamjkekrn66n18k259s89.apps.googleusercontent.com';
 
-export default function SignIn() {
+export default function page() {
 	useEffect(() => {
 		window.gapi?.load('client:auth2', () => {
 			const auth2 = window.gapi.auth2.init({
@@ -35,6 +35,7 @@ export default function SignIn() {
 						email: googleUser.getBasicProfile().getEmail(),
 						googleId: googleUser.getBasicProfile().getId(),
 					};
+					console.log(currentUser)
 					// localStorage.setItem('currentUser', JSON.stringify(currentUser));
 				},
 				(error: any) => {

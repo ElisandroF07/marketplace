@@ -19,7 +19,9 @@ export default function Home() {
 				<h1 className="text-[var(--text-primaryColor)] text-[30px] font-[500]">
 					Marketplace
 				</h1>
-				<div className="preloader"></div>
+				<div className="item">
+					<i className="loader --4"></i>
+				</div>
 			</div>
 			<RedirectLink
 				id="redirectToSignUp"
