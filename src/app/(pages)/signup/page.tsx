@@ -16,7 +16,7 @@ type userDataType = {
 
 const CLIENT_ID = '838474632269-k97u1p4di3gsamjkekrn66n18k259s89.apps.googleusercontent.com';
 
-export default function page() {
+export default function SingUp() {
 	useEffect(() => {
 		window.gapi?.load('client:auth2', () => {
 			const auth2 = window.gapi.auth2.init({

@@ -7,7 +7,7 @@ import mailSVG from '@/assets/images/mailSVG.svg';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-export default function page() {
+export default function EmailValidation() {
 	const [seconds, setSeconds] = useState(0);
 	let sec = 0;
 
