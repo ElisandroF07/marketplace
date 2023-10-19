@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🛒 Marketplace - Next.js
 
-## Getting Started
+Bem-vindo ao repositório privado do Marketplace, uma plataforma online para compra e venda de artigos construída com Next.js!
 
-First, run the development server:
+## 🚀 Introdução
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+O Marketplace é uma aplicação web moderna que permite aos usuários comprar e vender uma variedade de artigos. Este projeto foi desenvolvido com o poderoso framework Next.js.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 Funcionalidades
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Pesquisa de produtos
+- Listagem de produtos
+- Detalhes do produto
+- Autenticação de usuários
+- Carrinho de compras
+- Checkout
+- Perfil do usuário
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🛠️ Instalação
 
-## Learn More
+Siga as etapas abaixo para configurar o ambiente de desenvolvimento:
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone este repositório.
+2. Execute `npm install` para instalar as dependências.
+3. Configure as variáveis de ambiente no arquivo `.env`.
+4. Execute `npm run dev` para iniciar o servidor de desenvolvimento.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Documentação
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Para obter mais informações sobre como usar e desenvolver para o Marketplace, consulte a [documentação](docs/README.md).
 
-## Deploy on Vercel
+## 📄 Licença
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Este projeto está sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 👨‍💻 Autores
+
+- [Seu Nome](https://github.com/seu-username)
+
+Sinta-se à vontade para contribuir ou relatar problemas!
+
+---
+
+Feito com ❤️ e Next.js
