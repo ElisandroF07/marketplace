@@ -35,7 +35,7 @@ Este projeto está sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) pa
 
 ## 👨‍💻 Autores
 
-- [Seu Nome](https://github.com/seu-username)
+- [Elisandro Franco](https://github.com/elisandrof07)
 
 Sinta-se à vontade para contribuir ou relatar problemas!
 
