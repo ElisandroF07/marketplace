@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { FaFacebook } from 'react-icons/fa6';
-import google from '@/assets/images/googleLogo.jpg';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import React from 'react'
+import { FaFacebook } from 'react-icons/fa6'
+import google from '@/assets/images/googleLogo.jpg'
+import Image from 'next/image'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const createUserSchema = z.object({
 	email: z
@@ -20,18 +20,17 @@ const createUserSchema = z.object({
 			message: 'Introduza um email válido',
 		})
 		.transform((email) => {
-			return email.trim().toLowerCase();
+			return email.trim().toLowerCase()
 		}),
 	password: z
 		.string()
 		.nonempty('A senha é obrigatória')
 		.min(6, 'A senha precisa ter mais de 6 caracteres'),
-});
+})
 
-type CreateUserFormData = z.infer<typeof createUserSchema>;
+type CreateUserFormData = z.infer<typeof createUserSchema>
 
 export default function SignUpForm() {
-
 	const router = useRouter()
 
 	const {
@@ -40,25 +39,26 @@ export default function SignUpForm() {
 		formState: { errors },
 	} = useForm<CreateUserFormData>({
 		resolver: zodResolver(createUserSchema),
-	});
-
+	})
 
 	interface dataType {
-		email: string,
+		email: string
 		password: string
 	}
 
-	async function login({email, password}: dataType) {
-		console.log(email);
+	async function login({ email, password }: dataType) {
+		console.log(email)
 		const signInResult = await signIn('credentials', {
 			email,
 			password,
-			redirect: false
+			redirect: false,
 		})
 		if (signInResult?.error) {
 			const signAlert = document.querySelector('#signAlert') as HTMLDivElement
 			signAlert.style.transform = 'translateX(0px)'
-			setTimeout(()=>{signAlert.style.transform = 'translateX(300px)'}, 3000)
+			setTimeout(() => {
+				signAlert.style.transform = 'translateX(300px)'
+			}, 3000)
 			return
 		}
 		router.replace('/auth/confirm-email')
@@ -143,11 +143,7 @@ export default function SignUpForm() {
 					id="customGoogleSignInButton"
 					type="button"
 					className="signOptions w-[48%] h-[45px] rounded-[11px] flex items-center justify-center gap-[10px]">
-					<Image
-						src={google}
-						alt="google"
-						className="w-[20px] h-[20px]"
-					/>
+					<Image src={google} alt="google" className="w-[20px] h-[20px]" />
 					<p className="text-[var(--text-primaryColor)] font-[400] text-[14px]">
 						Google
 					</p>
@@ -156,13 +152,11 @@ export default function SignUpForm() {
 			<div className="w-full flex items-center justify-center">
 				<p className="w-full text-center mt-[20px] text-[13px] mb-[20px] text-[var(--text-primaryColor)] font-[300]">
 					Ainda não tem uma conta?{' '}
-					<Link
-						href="/auth/sign-up"
-						className="text-[var(--focus-color)]">
+					<Link href="/auth/sign-up" className="text-[var(--focus-color)]">
 						Criar conta
 					</Link>
 				</p>
 			</div>
 		</form>
-	);
+	)
 }

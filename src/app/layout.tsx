@@ -20,7 +20,7 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="pt-PT">
-			<Body className={inter.className} children={children}/>
+			<Body className={inter.className}>{children}</Body>
 		</html>
 	)
 }

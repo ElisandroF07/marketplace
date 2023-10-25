@@ -5,7 +5,6 @@ import Image from 'next/image'
 import shoppingSvg from '@/assets/images/shoppingSVG.svg'
 import SignNegationAlert from '@/components/shared/signNegationAlert'
 
-
 type AuthLayoutProps = {
 	children: ReactNode
 }
@@ -35,7 +34,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 					/>
 				</div>
 				<div className="content h-full">{children}</div>
-				<SignNegationAlert text='Email ou Senha inválidos!'/>
+				<SignNegationAlert text="Email ou Senha inválidos!" />
 			</main>
 		</>
 	)
