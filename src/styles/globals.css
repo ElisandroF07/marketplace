@@ -17,6 +17,14 @@
   --main-borderColor: #c4c4c4;
   --aside-backgroundColor: #f1f1f5;
   --main-boxShadow:  0 0 #0000, 0 0 #0000, 3px -5px 40px hsl(240deg 8% 82% / 34%);
+  --alert-fontSize: 13px;
+  --alert-iconSize: 10px;
+}
+
+@media (prefers-color-scheme: light){
+  body > .main {
+    background-color: white;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,7 +34,7 @@
     --text-secondaryColor: #8A8E85;
     --icon-background: var(--text-primaryColor);
     --dutone-background: #0061ff36;
-    --duotone-foreground: ##0866FE;
+    --duotone-foreground: #0866FE;
     --focus-color: #000000;
     --progress-color: #2e2e2e;
     --focus-color: #196297;
@@ -70,6 +78,12 @@
 }
 
 @media screen and (min-width: 550px){
+
+  :root {
+    --alert-fontSize: 14px;
+    --alert-iconSize: 15px;
+  }
+
   .main {
     max-height: 770px;
     border-radius: 40px;
@@ -94,7 +108,7 @@
 .aside {
   display: none;
   padding: 20px 30px;
-  border-radius: 40px;
+  border-radius: 30px;
   background-color: var(--aside-backgroundColor);
 }
 

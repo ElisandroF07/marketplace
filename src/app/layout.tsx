@@ -1,47 +1,30 @@
-import '@/styles/globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Image from 'next/image';
-import shoppingSvg from '@/assets/images/shoppingSVG.svg';
+'use client'
 
-const inter = Inter({ subsets: ['latin'] });
+import '@/styles/globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { ReactNode } from 'react'
+import { ProgressLoader } from 'nextjs-progressloader'
+import { SessionProvider } from 'next-auth/react'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
 	title: 'Marketplace',
 	description: 'Compre e venda os seus artigos.',
-};
+}
 
-export default function RootLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+type RootLayoutProps = {
+	children: ReactNode
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang="pt-PT">
 			<body className={inter.className}>
-				<main className="main h-full">
-					<div className="aside">
-						<div className="asideTop">
-							<h1
-								className="font-[500] text-[28px] w-[70%] mt-[30px] text-[var(--text-primaryColor)]"
-								style={{ lineHeight: '20px' }}>
-								{' '}
-								Marketplace
-							</h1>
-							<p className="font-[200] text-[14px] mt-[10px] text-[var(--text-secondaryColor)]">
-								A sua plataforma online para compra e venda de artigos, entre
-								para poder usufruir todos os serviços que oferecemos à você.
-							</p>
-						</div>
-						<Image
-							className="asideImage"
-							src={shoppingSvg}
-							alt="shopping"
-						/>
-					</div>
-					<div className="content h-full">{children}</div>
-				</main>
+				<ProgressLoader showSpinner={false} shadow={false} />
+				<SessionProvider>{children}</SessionProvider>
 			</body>
 		</html>
-	);
+	)
 }
