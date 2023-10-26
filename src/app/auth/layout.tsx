@@ -12,8 +12,9 @@ type AuthLayoutProps = {
 export default function AuthLayout({ children }: AuthLayoutProps) {
 	return (
 		<>
-			<main className="main h-full">
-				<div className="aside">
+			<main className="w-full h-max main relative overflow-x-hidden">
+			<SignNegationAlert text="Email ou Senha inválidos!" />
+				<section className="aside">
 					<div className="asideTop">
 						<h1
 							className="font-[500] text-[28px] w-[70%] mt-[30px] text-[var(--text-primaryColor)]"
@@ -32,9 +33,9 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 						alt="shopping"
 						priority={true}
 					/>
-				</div>
-				<div className="content h-full">{children}</div>
-				<SignNegationAlert text="Email ou Senha inválidos!" />
+				</section>
+				<section className="content h-full">{children}</section>
+				
 			</main>
 		</>
 	)

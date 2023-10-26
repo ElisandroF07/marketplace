@@ -55,9 +55,9 @@ export default function SignUpForm() {
 		})
 		if (signInResult?.error) {
 			const signAlert = document.querySelector('#signAlert') as HTMLDivElement
-			signAlert.style.transform = 'translateX(0px)'
+			signAlert.style.right = '20px'
 			setTimeout(() => {
-				signAlert.style.transform = 'translateX(300px)'
+				signAlert.style.right = '-300px'
 			}, 3000)
 			return
 		}

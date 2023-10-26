@@ -46,7 +46,7 @@ export default function SignIn() {
 
 	return (
 		<>
-			<main className="bg-[var(--background-body-introduction)] text-[var(--foreground-introduction)] w-full h-full p-[15px]">
+			<div className="bg-[var(--background-body-introduction)] text-[var(--foreground-introduction)] w-full h-full p-[15px]">
 				<FormHeader
 					title="Entrar"
 					subtitle="Compre e venda no conforto do seu lar!"
@@ -66,7 +66,7 @@ export default function SignIn() {
 					data-client_id={CLIENT_ID}
 					data-callback="handleCredentialResponse"></div>
 				<div className="g_id_signin" data-width="40" data-type="standard"></div> */}
-			</main>
+			</div>
 		</>
 	)
 }

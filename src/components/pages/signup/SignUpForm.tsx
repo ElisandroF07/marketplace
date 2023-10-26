@@ -170,14 +170,13 @@ export default function SignUpForm() {
 				</button>
 			</div>
 			<div className="w-full flex items-center justify-center">
-				<p className="w-full text-center mt-[20px] text-[13px] mb-[20px] text-[var(--text-primaryColor)] font-[300]">
+				<p className="w-full text-center mt-[20px] text-[13px] mb-[40px] text-[var(--text-primaryColor)] font-[300]">
 					Já tem uma conta?{' '}
 					<Link href="/auth/sign-in" className="text-[var(--focus-color)]">
 						Entrar
 					</Link>
 				</p>
 			</div>
-			<RedirectLink id="redirectLink" href="/auth/confirm-email" />
 		</form>
 	)
 }
