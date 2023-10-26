@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 	return (
 		<>
 			<main className="w-full h-max main relative overflow-x-hidden">
-			<SignNegationAlert text="Email ou Senha inválidos!" />
+			
 				<section className="aside">
 					<div className="asideTop">
 						<h1

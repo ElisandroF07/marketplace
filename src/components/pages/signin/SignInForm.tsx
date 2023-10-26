@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import SignNegationAlert from '@/components/shared/signNegationAlert'
 
 const createUserSchema = z.object({
 	email: z
@@ -157,6 +158,7 @@ export default function SignUpForm() {
 					</Link>
 				</p>
 			</div>
+			<SignNegationAlert text="Email ou Senha inválidos!" />
 		</form>
 	)
 }
