@@ -1,13 +1,17 @@
-'use client';
+'use client'
 
-import React, { useEffect } from 'react';
-import { FaFacebook } from 'react-icons/fa6';
-import google from '@/assets/images/googleLogo.jpg';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import React, { CSSProperties, useState } from 'react'
+import { FaFacebook } from 'react-icons/fa6'
+import google from '@/assets/images/googleLogo.jpg'
+import Image from 'next/image'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import SignNegationAlert from '@/components/shared/signNegationAlert'
+import { TailSpin } from 'react-loader-spinner'
 
 const createUserSchema = z.object({
 	email: z
@@ -18,32 +22,60 @@ const createUserSchema = z.object({
 			message: 'Introduza um email válido',
 		})
 		.transform((email) => {
-			return email.trim().toLowerCase();
+			return email.trim().toLowerCase()
 		}),
 	password: z
 		.string()
 		.nonempty('A senha é obrigatória')
 		.min(6, 'A senha precisa ter mais de 6 caracteres'),
-});
+})
 
-type CreateUserFormData = z.infer<typeof createUserSchema>;
+type CreateUserFormData = z.infer<typeof createUserSchema>
 
 export default function SignUpForm() {
+	const router = useRouter()
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<CreateUserFormData>({
 		resolver: zodResolver(createUserSchema),
-	});
+	})
 
-	function saveData(data: any) {
-		console.log(data);
+	interface dataType {
+		email: string
+		password: string
+	}
+
+	async function login({ email, password }: dataType) {
+		setIsLoading(true)
+		const signInResult = await signIn('credentials', {
+			email,
+			password,
+			redirect: false,
+		})
+		if (signInResult?.error) {
+			setIsLoading(false)
+			const signAlert = document.querySelector('#signAlert') as HTMLDivElement
+			signAlert.style.right = '20px'
+			setTimeout(() => {
+				signAlert.style.right = '-300px'
+			}, 3000)
+			return
+		}
+		setIsLoading(false)
+		router.replace('/auth/confirm-email')
+	}
+
+	const override: CSSProperties = {
+		display: 'block',
+		borderColor: 'red',
 	}
 
 	return (
 		<form
-			onSubmit={handleSubmit(saveData)}
+			onSubmit={handleSubmit(login)}
 			className="mt-[43px] flex flex-col gap-[13px]">
 			<div className="inputControl flex flex-col gap-[5px] relative">
 				<label
@@ -97,8 +129,16 @@ export default function SignUpForm() {
 			</div>
 			<button
 				type="submit"
-				className="signButton w-full h-[45px] bg-[var(--focus-color)] rounded-[11px] text-[#fff] mt-[35px] text-[14px]">
-				Entrar
+				disabled={isLoading}
+				className="signButton w-full h-[45px] bg-[var(--focus-color)] rounded-[11px] text-[#fff] mt-[35px] text-[14px] flex items-center justify-center">
+				{isLoading ? <TailSpin
+					height="25"
+					width="25"
+					color="#fff"
+					ariaLabel="tail-spin-loading"
+					radius="1"
+					visible={true}
+				/> : "Entrar"}
 			</button>
 			<div className="flex items-center justify-center mt-[10px] mb-[10px]">
 				<div className="w-[80%] h-[.8px] bg-[var(--text-secondaryColor)] opacity-50"></div>
@@ -120,11 +160,7 @@ export default function SignUpForm() {
 					id="customGoogleSignInButton"
 					type="button"
 					className="signOptions w-[48%] h-[45px] rounded-[11px] flex items-center justify-center gap-[10px]">
-					<Image
-						src={google}
-						alt="google"
-						className="w-[20px] h-[20px]"
-					/>
+					<Image src={google} alt="google" className="w-[20px] h-[20px]" />
 					<p className="text-[var(--text-primaryColor)] font-[400] text-[14px]">
 						Google
 					</p>
@@ -133,13 +169,12 @@ export default function SignUpForm() {
 			<div className="w-full flex items-center justify-center">
 				<p className="w-full text-center mt-[20px] text-[13px] mb-[20px] text-[var(--text-primaryColor)] font-[300]">
 					Ainda não tem uma conta?{' '}
-					<Link
-						href="/signup"
-						className="text-[var(--focus-color)]">
+					<Link href="/auth/sign-up" className="text-[var(--focus-color)]">
 						Criar conta
 					</Link>
 				</p>
 			</div>
+			<SignNegationAlert text="Email ou Senha inválidos!" />
 		</form>
-	);
+	)
 }

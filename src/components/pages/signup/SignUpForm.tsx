@@ -1,13 +1,14 @@
-'use client';
+'use client'
 
-import React, { useEffect } from 'react';
-import { FaFacebook } from 'react-icons/fa6';
-import google from '@/assets/images/googleLogo.jpg';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import React, { useEffect } from 'react'
+import { FaFacebook } from 'react-icons/fa6'
+import google from '@/assets/images/googleLogo.jpg'
+import Image from 'next/image'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
+import RedirectLink from '../../shared/RedirectLink'
 
 const createUserSchema = z.object({
 	name: z
@@ -18,8 +19,8 @@ const createUserSchema = z.object({
 				.trim()
 				.split(' ')
 				.map((word) => {
-					return word[0].toLocaleUpperCase().concat(word.substring(1));
-				});
+					return word[0].toLocaleUpperCase().concat(word.substring(1))
+				})
 		}),
 	email: z
 		.string()
@@ -28,15 +29,15 @@ const createUserSchema = z.object({
 			message: 'Introduza um email válido',
 		})
 		.transform((email) => {
-			return email.trim().toLowerCase();
+			return email.trim().toLowerCase()
 		}),
 	password: z.string().min(6, 'A senha precisa ter mais de 6 caracteres'),
 	isConditionsAccepted: z.literal<boolean>(true, {
 		errorMap: () => ({ message: 'Você deve aceitar os termos e condições' }),
 	}),
-});
+})
 
-type CreateUserFormData = z.infer<typeof createUserSchema>;
+type CreateUserFormData = z.infer<typeof createUserSchema>
 
 export default function SignUpForm() {
 	const {
@@ -45,10 +46,14 @@ export default function SignUpForm() {
 		formState: { errors },
 	} = useForm<CreateUserFormData>({
 		resolver: zodResolver(createUserSchema),
-	});
+	})
 
 	function saveData(data: any) {
-		console.log(data);
+		console.log(data)
+		let redirectLink = document.querySelector(
+			'#redirectLink'
+		) as HTMLLinkElement
+		redirectLink?.click()
 	}
 
 	return (
@@ -158,26 +163,20 @@ export default function SignUpForm() {
 					id="customGoogleSignInButton"
 					type="button"
 					className="signOptions w-[48%] h-[45px] rounded-[11px] flex items-center justify-center gap-[10px]">
-					<Image
-						src={google}
-						alt="google"
-						className="w-[20px] h-[20px]"
-					/>
+					<Image src={google} alt="google" className="w-[20px] h-[20px]" />
 					<p className="text-[var(--text-primaryColor)] font-[400] text-[14px]">
 						Google
 					</p>
 				</button>
 			</div>
 			<div className="w-full flex items-center justify-center">
-				<p className="w-full text-center mt-[20px] text-[13px] mb-[20px] text-[var(--text-primaryColor)] font-[300]">
+				<p className="w-full text-center mt-[20px] text-[13px] mb-[40px] text-[var(--text-primaryColor)] font-[300]">
 					Já tem uma conta?{' '}
-					<Link
-						href="/signIn"
-						className="text-[var(--focus-color)]">
+					<Link href="/auth/sign-in" className="text-[var(--focus-color)]">
 						Entrar
 					</Link>
 				</p>
 			</div>
 		</form>
-	);
+	)
 }

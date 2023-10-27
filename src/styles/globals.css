@@ -10,12 +10,21 @@
   --dutone-background: #E8EEF2;
   --duotone-foreground: #196297;
   --focus-color: #ffffff;
-  ---progress-color: #dddddd;
+  --progress-color: #dddddd;
   --focus-color: #196297;
   --input-borderColor: #CBCBCB;
   --body-backgroundImage: url('../assets/images/bgLight.PNG');
   --main-borderColor: #c4c4c4;
-  --aside-backgroundColor: #ffffff;
+  --aside-backgroundColor: #f1f1f5;
+  --main-boxShadow:  0 0 #0000, 0 0 #0000, 3px -5px 40px hsl(240deg 8% 82% / 34%);
+  --alert-fontSize: 13px;
+  --alert-iconSize: 10px;
+}
+
+@media (prefers-color-scheme: light){
+  body > .main {
+    background-color: white;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,14 +34,15 @@
     --text-secondaryColor: #8A8E85;
     --icon-background: var(--text-primaryColor);
     --dutone-background: #0061ff36;
-    --duotone-foreground: ##0866FE;
+    --duotone-foreground: #0866FE;
     --focus-color: #000000;
-    ---progress-color: #2e2e2e;
+    --progress-color: #2e2e2e;
     --focus-color: #196297;
     --input-borderColor: #2b2b2b;
     --body-backgroundImage: url('../assets/images/bgDark.PNG');
     --main-borderColor: #373737;
-    --aside-backgroundColor: #00000040;
+    --aside-backgroundColor: #8383831a;
+    --main-boxShadow:  0 0 #0000, 0 0 #0000, 3px -5px 40px 20px hsl(0deg 0% 0% / 24%);
   }
 }
 
@@ -40,16 +50,17 @@
 
   body > .main {
     max-width: max-content;
-   padding: 0px 30px 0px 0px;
-   overflow: hidden;
+    overflow: hidden;
+
   }
 
   .main > .content {
     width: 350px;
+    overflow-y: scroll;
   }
 
   .asideImage {
-    width: 90%;
+    width: 80%;
   }
 
   .asideTop {
@@ -57,13 +68,11 @@
   }
 
   .main > .aside {
-    padding-left: 30px;
-    padding-top: 10px;
     display: flex;
     width: 450px;
     height: 100%;
     background-color: var(--aside-backgroundColor);
-    margin-right: 40px;
+    margin-right: 25px;
     align-items: center;
     justify-content: start;
     flex-direction: column;
@@ -71,13 +80,29 @@
 }
 
 @media screen and (min-width: 550px){
-  .main {
-    max-height: 700px;
-    border-top-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-    padding: 0px 30px;
-    border: 1px solid var(--main-borderColor);
+
+  :root {
+    --alert-fontSize: 14px;
+    --alert-iconSize: 15px;
   }
+
+  .main {
+    max-height: 770px;
+    border-radius: 40px;
+    padding: 0px 20px;
+    box-shadow: var(--main-boxShadow);
+    padding: 30px;
+    overflow-y: scroll;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--focus-color);
 }
 
 
@@ -89,11 +114,14 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
+
 }
 
 .aside {
   display: none;
-  
+  padding: 20px 30px;
+  border-radius: 30px;
+  background-color: var(--aside-backgroundColor);
 }
 
 .content {
@@ -109,34 +137,51 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.preloader {
   position: relative;
-  width: 180px;
-  height: 5px;
-  border-radius: 10px;
-  background-color: var(--text-primaryColor);
-  -webkit-box-reflect: below .2px var(--text-primaryColor);
+  overflow: hidden;
 }
 
-.preloader:before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--text-primaryColor), var(---progress-color),  var(---progress-color), var(---progress-color), var(--text-primaryColor));
-  animation: animate 5s linear infinite;
-  background-size: 500%;
-  border-radius: 10px;
+.loader {
+	display: block;
+	position: relative;
+	width: 50%;
+	display: grid;
+	place-items: center;
+  border-radius: 3px;
 }
 
-@keyframes animate {
-  0% {
-    background-position: 0 0;
-  }
-  0% {
-    background-position: 500% 0;
-  }
+.loader::before,
+.loader::after {
+	content: '';
+	box-sizing: border-box;
+	position: absolute;
+  border-radius: 2px;
+}
+
+
+.loader.--4::before {
+	height: 3px;
+	width: 170px;
+	background-color:var(--text-primaryColor);
+	animation: loader-4 0.8s cubic-bezier(0, 0, 0.03, 0.9) infinite;
+}
+
+@keyframes loader-4 {
+	0%, 44%, 88.1%, 100% {
+		transform-origin: left;
+	}
+	
+	0%, 100%, 88% {
+		transform: scaleX(0);
+	}
+	
+	44.1%, 88% {
+		transform-origin: right;
+	}
+	
+	33%, 44% {
+		transform: scaleX(1);
+	}
 }
 
 .inputControl input,
@@ -151,4 +196,3 @@ body {
   font-weight: 400;
   color: var(--text-secondaryColor);
 }
-
