@@ -51,10 +51,12 @@
   body > .main {
     max-width: max-content;
     overflow: hidden;
+
   }
 
   .main > .content {
     width: 350px;
+    overflow-y: scroll;
   }
 
   .asideImage {
@@ -90,7 +92,17 @@
     padding: 0px 20px;
     box-shadow: var(--main-boxShadow);
     padding: 30px;
+    overflow-y: scroll;
   }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: var(--focus-color);
 }
 
 

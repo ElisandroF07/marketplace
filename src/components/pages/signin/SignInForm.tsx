@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { CSSProperties, useState } from 'react'
 import { FaFacebook } from 'react-icons/fa6'
 import google from '@/assets/images/googleLogo.jpg'
 import Image from 'next/image'
@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import SignNegationAlert from '@/components/shared/signNegationAlert'
+import { TailSpin } from 'react-loader-spinner'
 
 const createUserSchema = z.object({
 	email: z
@@ -33,7 +34,7 @@ type CreateUserFormData = z.infer<typeof createUserSchema>
 
 export default function SignUpForm() {
 	const router = useRouter()
-
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const {
 		register,
 		handleSubmit,
@@ -48,13 +49,14 @@ export default function SignUpForm() {
 	}
 
 	async function login({ email, password }: dataType) {
-		console.log(email)
+		setIsLoading(true)
 		const signInResult = await signIn('credentials', {
 			email,
 			password,
 			redirect: false,
 		})
 		if (signInResult?.error) {
+			setIsLoading(false)
 			const signAlert = document.querySelector('#signAlert') as HTMLDivElement
 			signAlert.style.right = '20px'
 			setTimeout(() => {
@@ -62,7 +64,13 @@ export default function SignUpForm() {
 			}, 3000)
 			return
 		}
+		setIsLoading(false)
 		router.replace('/auth/confirm-email')
+	}
+
+	const override: CSSProperties = {
+		display: 'block',
+		borderColor: 'red',
 	}
 
 	return (
@@ -121,8 +129,16 @@ export default function SignUpForm() {
 			</div>
 			<button
 				type="submit"
-				className="signButton w-full h-[45px] bg-[var(--focus-color)] rounded-[11px] text-[#fff] mt-[35px] text-[14px]">
-				Entrar
+				disabled={isLoading}
+				className="signButton w-full h-[45px] bg-[var(--focus-color)] rounded-[11px] text-[#fff] mt-[35px] text-[14px] flex items-center justify-center">
+				{isLoading ? <TailSpin
+					height="25"
+					width="25"
+					color="#fff"
+					ariaLabel="tail-spin-loading"
+					radius="1"
+					visible={true}
+				/> : "Entrar"}
 			</button>
 			<div className="flex items-center justify-center mt-[10px] mb-[10px]">
 				<div className="w-[80%] h-[.8px] bg-[var(--text-secondaryColor)] opacity-50"></div>

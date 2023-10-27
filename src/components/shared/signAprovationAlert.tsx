@@ -4,11 +4,11 @@ export default function SignAprovationAlert({text}:{text: string}) {
 
 	function handleClick(){
 		const signAlert = document.querySelector('#signAlert') as HTMLDivElement
-		signAlert.style.transform = 'translateX(300px)'
+		signAlert.style.right = '-300px'
 	}
 
 	return (
-		<div id='signAlert' className="flex items-center translate-x-[300px] transition-all duration-500 justify-center gap-[10px] bg-green-500 px-[15px] py-[8px] rounded-[9px] z-[100] absolute top-[20px] right-[20px]">
+		<div id='signAlert' className="flex items-center justify-center transition-all duration-500 gap-[10px] bg-green-500 px-[15px] py-[8px] rounded-[9px] z-[100] absolute top-[20px] -right-[300px]">
 			<p className="text-white font-[400] text-[13px]">
 				{text}
 			</p>

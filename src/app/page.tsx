@@ -10,16 +10,13 @@ export default function Home() {
 		router.replace('/auth/sign-in')
 	})
 
-	return null;
+	return <div className="w-full h-full flex flex-col gap-4 items-center justify-center">
+	<h1 className="text-[var(--text-primaryColor)] text-[30px] font-[500]">
+		Marketplace
+	</h1>
+	<div className="item">
+		<i className="loader --4"></i>
+	</div>
+</div>;
 }
 
-// <>
-		// 	<div className="w-full h-full flex flex-col gap-4 items-center justify-center">
-		// 		<h1 className="text-[var(--text-primaryColor)] text-[30px] font-[500]">
-		// 			Marketplace
-		// 		</h1>
-		// 		<div className="item">
-		// 			<i className="loader --4"></i>
-		// 		</div>
-		// 	</div>
-		// </>

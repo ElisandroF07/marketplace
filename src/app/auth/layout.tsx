@@ -13,7 +13,6 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 	return (
 		<>
 			<main className="w-full h-max main relative overflow-x-hidden">
-			
 				<section className="aside">
 					<div className="asideTop">
 						<h1
