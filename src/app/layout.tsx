@@ -2,8 +2,6 @@ import '@/styles/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
-import { ProgressLoader } from 'nextjs-progressloader'
-import { SessionProvider } from 'next-auth/react'
 import Body from '@/components/body'
 
 const inter = Inter({ subsets: ['latin'] })
