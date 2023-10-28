@@ -22,7 +22,7 @@ export default function ButtonLogout (){
     }
 
     return(
-        <button onClick={logOut} disabled={isLoading} className="bg-red-500 w-full h-[45px] rounded-[11px] text-[#fff] mt-[35px] gap-[10px] text-[14px] flex items-center justify-center absolute bottom-[25px]">{isLoading ? "Saindo" : "Sair"}   {isLoading && <TailSpin
+        <button onClick={logOut} disabled={isLoading} className="bg-red-500 w-full h-[45px] rounded-[11px] text-[#fff] mt-[35px] gap-[10px] text-[14px] flex items-center justify-center ">{isLoading ? "Saindo" : "Sair"}   {isLoading && <TailSpin
             height="15"
             width="15"
             color="#fff"
