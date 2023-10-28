@@ -10,9 +10,8 @@ type AuthLayoutProps = {
 }
 
 export default async function AuthLayout({ children }: AuthLayoutProps) {
-
 	const session = await getServerSession(nextAuthOptions)
-	if (session){
+	if (session) {
 		redirect('/dashboard')
 	}
 	return (
@@ -39,7 +38,6 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
 					/>
 				</section>
 				<section className="content h-full">{children}</section>
-				
 			</main>
 		</>
 	)

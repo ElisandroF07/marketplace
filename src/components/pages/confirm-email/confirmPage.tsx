@@ -1,24 +1,20 @@
-"use client"
+'use client'
 
 import React, { useState } from 'react'
 import { FaAngleLeft } from 'react-icons/fa6'
 import Image from 'next/image'
 import mailSVG from '@/assets/images/mailSVG.svg'
 import Link from 'next/link'
-import { useEffect } from 'react'
 import axios from 'axios'
-import SignAprovationAlert from '@/components/shared/signAprovationAlert'
 import { TailSpin } from 'react-loader-spinner'
 import SignNegationAlert from '@/components/shared/signNegationAlert'
 
-export default function ConfirmEmailPage({email}:{email:string}) {
-
+export default function ConfirmEmailPage({ email }: { email: string }) {
 	const [seconds, setSeconds] = useState(0)
 	const [isLoading, setIsLoading] = useState(false)
 	let sec = 0
-	const [alertText, setAlertText] = useState<string>("")
+	const [alertText, setAlertText] = useState<string>('')
 	const [isDisabled, setIsDisabled] = useState<boolean>(false)
-
 
 	function startTimer() {
 		setIsDisabled(true)
@@ -44,36 +40,39 @@ export default function ConfirmEmailPage({email}:{email:string}) {
 
 	function reSendEmail() {
 		setIsLoading(true)
-		axios.get(`http://localhost:3004/auth/resend-email/${email}`)
-		.then((response)=>{
-			setIsLoading(false)
-			if (response.status === 201) {
-				startTimer()
-			}
-		})
-		.catch((error)=>{
-			setIsLoading(false)
-			if (error.response.status === 422) {
-				setAlertText("O email já foi confirmado!")
-				const signAlert = document.querySelector(
-					'#signAlert'
-				) as HTMLDivElement
-				signAlert.style.right = '20px'
-				setTimeout(() => {
-					signAlert.style.right = '-300px'
-				}, 3000)
-			}
-			else if (error.response.status === 404) {
-				setAlertText("Email não encontrado!")
-				const signAlert = document.querySelector(
-					'#signAlert'
-				) as HTMLDivElement
-				signAlert.style.right = '20px'
-				setTimeout(() => {
-					signAlert.style.right = '-300px'
-				}, 3000)
-			}
-		})
+		let baseUrl = process.env.API_BASE_URL
+		let resendEmailEndpoint = process.env.RESEND_EMAIL_ENDPOINT
+		let uri = `${baseUrl}${resendEmailEndpoint}`
+		axios
+			.get(`https://marketplace-api-rtxc.onrender.com/auth/resend-email/${email}`)
+			.then((response) => {
+				setIsLoading(false)
+				if (response.status === 201) {
+					startTimer()
+				}
+			})
+			.catch((error) => {
+				setIsLoading(false)
+				if (error.response.status === 422) {
+					setAlertText('O email já foi confirmado!')
+					const signAlert = document.querySelector(
+						'#signAlert'
+					) as HTMLDivElement
+					signAlert.style.right = '20px'
+					setTimeout(() => {
+						signAlert.style.right = '-300px'
+					}, 3000)
+				} else if (error.response.status === 404) {
+					setAlertText('Email não encontrado!')
+					const signAlert = document.querySelector(
+						'#signAlert'
+					) as HTMLDivElement
+					signAlert.style.right = '20px'
+					setTimeout(() => {
+						signAlert.style.right = '-300px'
+					}, 3000)
+				}
+			})
 	}
 
 	return (
@@ -97,32 +96,37 @@ export default function ConfirmEmailPage({email}:{email:string}) {
 					Verifique o seu endereço de email
 				</h1>
 				<p className="font-[300] text-[14px] mt-[5px] text-[var(--text-secondaryColor)]">
-					Obrigado por se cadastar! Enviamos um link para o seu endereço de email para concluir o seu cadastro.
+					Obrigado por se cadastar! Enviamos um link para o seu endereço de
+					email para concluir o seu cadastro.
 				</p>
 			</div>
 			<div className="mt-[30px] px-[15px]">
 				<button
-					id='verifyButton'
+					id="verifyButton"
 					type="button"
 					disabled={isDisabled}
 					onClick={reSendEmail}
 					className=" w-full h-[45px] flex items-center justify-center bg-[var(--focus-color)] outline-none rounded-[11px] transition-colors duration-500 text-[#fff] mt-[35px] text-[14px]">
-					{isLoading ? <TailSpin
-						height="25"
-						width="25"
-						color="#fff"
-						ariaLabel="tail-spin-loading"
-						radius="1"
-						visible={true}
-					/> : (
-						isDisabled ? "Email enviado" : "Reenviar email"
+					{isLoading ? (
+						<TailSpin
+							height="25"
+							width="25"
+							color="#fff"
+							ariaLabel="tail-spin-loading"
+							radius="1"
+							visible={true}
+						/>
+					) : isDisabled ? (
+						'Email enviado'
+					) : (
+						'Reenviar email'
 					)}
 				</button>
 				<p className="w-full text-center mt-[20px] text-[13px] mb-[20px] text-[var(--text-primaryColor)] font-[300]">
 					Não recebeu o emai? Reenvie em {seconds}s
 				</p>
 			</div>
-			<SignNegationAlert text={alertText} key={"SignNegationAlert1"}/>
+			<SignNegationAlert text={alertText} key={'SignNegationAlert1'} />
 		</div>
 	)
 }

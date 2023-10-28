@@ -10,7 +10,10 @@ const nextAuthOptions: NextAuthOptions = {
                 password: {label: 'password', type: 'password'}
             },
             async authorize(credentials) {
-                const response = await fetch('http://localhost:3004/auth/login', {
+                let baseUrl = process.env.API_BASE_URL
+                let loginEndpoint = process.env.LOGIN_ENDPOINT
+                let uri = `${baseUrl}${loginEndpoint}`
+                const response = await fetch('https://marketplace-api-rtxc.onrender.com/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'Application/json'

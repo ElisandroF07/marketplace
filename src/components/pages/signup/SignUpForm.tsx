@@ -15,7 +15,6 @@ import { TailSpin } from 'react-loader-spinner'
 import SignNegationAlert from '@/components/shared/signNegationAlert'
 import axios from 'axios'
 
-
 const createUserSchema = z.object({
 	name: z
 		.string()
@@ -73,25 +72,27 @@ export default function SignUpForm() {
 
 		let baseUrl = process.env.API_BASE_URL
 		let registerEndpoint = process.env.REGISTER_ENDPOINT
-		axios.post('http://localhost:3004/auth/register', user)
-		.then((response)=>{
-			setIsLoading(false)
-			if (response.status == 201) {
-				router.push(`/auth/confirm-email/${response.data.userEmail}`)
-			}
-		})
-		.catch((error)=>{
-			setIsLoading(false)
-			if (error.response.status === 422) {
-				const signAlert = document.querySelector(
-					'#signAlert'
-				) as HTMLDivElement
-				signAlert.style.right = '20px'
-				setTimeout(() => {
-					signAlert.style.right = '-350px'
-				}, 3000)
-			}
-		})
+		let uri = `${baseUrl}${registerEndpoint}`
+		axios
+			.post('https://marketplace-api-rtxc.onrender.com/auth/register', user)
+			.then((response) => {
+				setIsLoading(false)
+				if (response.status == 201) {
+					router.push(`/auth/confirm-email/${response.data.userEmail}`)
+				}
+			})
+			.catch((error) => {
+				setIsLoading(false)
+				if (error.response.status === 422) {
+					const signAlert = document.querySelector(
+						'#signAlert'
+					) as HTMLDivElement
+					signAlert.style.right = '20px'
+					setTimeout(() => {
+						signAlert.style.right = '-350px'
+					}, 3000)
+				}
+			})
 	}
 
 	return (

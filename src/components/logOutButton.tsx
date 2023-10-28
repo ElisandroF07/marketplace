@@ -18,8 +18,7 @@ export default function ButtonLogout (){
             setIsLoading(false)
             router.replace('/auth/sign-in')
         })
-        
-        
+ 
     }
 
     return(

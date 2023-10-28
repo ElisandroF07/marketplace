@@ -63,14 +63,11 @@ export default function SignUpForm() {
 				signAlert.style.right = '-300px'
 			}, 3000)
 			return
-		}
-		else {
+		} else {
 			setIsLoading(false)
 			router.replace('/dashboard')
 		}
-		
 	}
-
 
 	return (
 		<form
@@ -130,14 +127,18 @@ export default function SignUpForm() {
 				type="submit"
 				disabled={isLoading}
 				className="signButton w-full h-[45px] bg-[var(--focus-color)] rounded-[11px] text-[#fff] mt-[35px] text-[14px] flex items-center justify-center">
-				{isLoading ? <TailSpin
-					height="25"
-					width="25"
-					color="#fff"
-					ariaLabel="tail-spin-loading"
-					radius="1"
-					visible={true}
-				/> : "Entrar"}
+				{isLoading ? (
+					<TailSpin
+						height="25"
+						width="25"
+						color="#fff"
+						ariaLabel="tail-spin-loading"
+						radius="1"
+						visible={true}
+					/>
+				) : (
+					'Entrar'
+				)}
 			</button>
 			<div className="flex items-center justify-center mt-[10px] mb-[10px]">
 				<div className="w-[80%] h-[.8px] bg-[var(--text-secondaryColor)] opacity-50"></div>
