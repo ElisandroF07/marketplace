@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaFacebook } from 'react-icons/fa6'
 import google from '@/assets/images/googleLogo.jpg'
 import Image from 'next/image'
@@ -9,6 +9,12 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import RedirectLink from '../../shared/RedirectLink'
+
+import { useRouter } from 'next/navigation'
+import { TailSpin } from 'react-loader-spinner'
+import SignNegationAlert from '@/components/shared/signNegationAlert'
+import axios from 'axios'
+
 
 const createUserSchema = z.object({
 	name: z
@@ -40,6 +46,9 @@ const createUserSchema = z.object({
 type CreateUserFormData = z.infer<typeof createUserSchema>
 
 export default function SignUpForm() {
+	const router = useRouter()
+	const [isLoading, setIsLoading] = useState(false)
+
 	const {
 		register,
 		handleSubmit,
@@ -49,11 +58,40 @@ export default function SignUpForm() {
 	})
 
 	function saveData(data: any) {
-		console.log(data)
-		let redirectLink = document.querySelector(
-			'#redirectLink'
-		) as HTMLLinkElement
-		redirectLink?.click()
+		setIsLoading(true)
+		const { name, email, password, isConditionsAccepted } = data
+		const user = {
+			name: name,
+			email: email,
+			password: password,
+			roles: {
+				consumer: true,
+				seller: false,
+			},
+			verified: false,
+		}
+
+		let baseUrl = process.env.API_BASE_URL
+		let registerEndpoint = process.env.REGISTER_ENDPOINT
+		axios.post('http://localhost:3004/auth/register', user)
+		.then((response)=>{
+			setIsLoading(false)
+			if (response.status == 201) {
+				router.push(`/auth/confirm-email/${response.data.userEmail}`)
+			}
+		})
+		.catch((error)=>{
+			setIsLoading(false)
+			if (error.response.status === 422) {
+				const signAlert = document.querySelector(
+					'#signAlert'
+				) as HTMLDivElement
+				signAlert.style.right = '20px'
+				setTimeout(() => {
+					signAlert.style.right = '-350px'
+				}, 3000)
+			}
+		})
 	}
 
 	return (
@@ -140,8 +178,19 @@ export default function SignUpForm() {
 			)}
 			<button
 				type="submit"
-				className="signButton w-full h-[45px] bg-[var(--focus-color)] rounded-[11px] text-[#fff] mt-[35px] text-[14px]">
-				Criar Conta
+				className="signButton w-full h-[45px] bg-[var(--focus-color)] rounded-[11px] flex items-center justify-center text-[#fff] mt-[35px] text-[14px]">
+				{isLoading ? (
+					<TailSpin
+						height="25"
+						width="25"
+						color="#fff"
+						ariaLabel="tail-spin-loading"
+						radius="1"
+						visible={true}
+					/>
+				) : (
+					'Criar conta'
+				)}
 			</button>
 			<div className="flex items-center justify-center mt-[10px] mb-[10px]">
 				<div className="w-[80%] h-[.8px] bg-[var(--text-secondaryColor)] opacity-50"></div>
@@ -177,6 +226,7 @@ export default function SignUpForm() {
 					</Link>
 				</p>
 			</div>
+			<SignNegationAlert text="Usuário já associado à este email!" />
 		</form>
 	)
 }

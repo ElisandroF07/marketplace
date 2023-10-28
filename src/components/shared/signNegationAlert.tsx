@@ -8,7 +8,7 @@ export default function SignNegationAlert({text}:{text: string}) {
 	}
 
 	return (
-		<div id='signAlert' className="flex items-center justify-center transition-all duration-500 gap-[10px] bg-red-500 px-[15px] py-[8px] rounded-[9px] z-[100] absolute top-[20px] -right-[300px]">
+		<div id='signAlert' className="flex items-center justify-center transition-all duration-500 gap-[10px] bg-red-500 px-[15px] py-[8px] rounded-[9px] z-[100] absolute top-[20px] -right-[350px]">
 			<p className="text-white font-[400]" style={{fontSize: 'var(--alert-fontSize)'}}>
 				{text}
 			</p>

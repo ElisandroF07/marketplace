@@ -1,6 +1,6 @@
 'use client'
 
-import React, { CSSProperties, useState } from 'react'
+import React, { useState } from 'react'
 import { FaFacebook } from 'react-icons/fa6'
 import google from '@/assets/images/googleLogo.jpg'
 import Image from 'next/image'
@@ -64,14 +64,13 @@ export default function SignUpForm() {
 			}, 3000)
 			return
 		}
-		setIsLoading(false)
-		router.replace('/auth/confirm-email')
+		else {
+			setIsLoading(false)
+			router.replace('/dashboard')
+		}
+		
 	}
 
-	const override: CSSProperties = {
-		display: 'block',
-		borderColor: 'red',
-	}
 
 	return (
 		<form

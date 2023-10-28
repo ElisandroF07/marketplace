@@ -10,7 +10,7 @@ const nextAuthOptions: NextAuthOptions = {
                 password: {label: 'password', type: 'password'}
             },
             async authorize(credentials) {
-                const response = await fetch('http://localhost:8081/login', {
+                const response = await fetch('http://localhost:3004/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'Application/json'
@@ -30,6 +30,16 @@ const nextAuthOptions: NextAuthOptions = {
     ],
     pages: {
         signIn: '/auth/sing-in'
+    },
+    callbacks: {
+        async jwt({ token, user}) {
+            user && (token.user = user)
+            return token;
+        },
+        async session({ session, token }) {
+            session = token.user as any
+            return session
+        }
     }
     
 }

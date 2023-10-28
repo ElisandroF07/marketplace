@@ -1,15 +1,20 @@
-'use client'
-
 import { ReactNode } from 'react'
 import Image from 'next/image'
 import shoppingSvg from '@/assets/images/shoppingSVG.svg'
-import SignNegationAlert from '@/components/shared/signNegationAlert'
+import { getServerSession } from 'next-auth'
+import nextAuthOptions from '@/libs/nextAuthOptions'
+import { redirect } from 'next/navigation'
 
 type AuthLayoutProps = {
 	children: ReactNode
 }
 
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default async function AuthLayout({ children }: AuthLayoutProps) {
+
+	const session = await getServerSession(nextAuthOptions)
+	if (session){
+		redirect('/dashboard')
+	}
 	return (
 		<>
 			<main className="w-full h-max main relative overflow-x-hidden">
